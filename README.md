@@ -63,6 +63,36 @@ The examples are deliberately small, but they are not throwaway snippets:
 
 These apps exist so the skills and conventions have something concrete to anchor to. They also serve as reference points when Codex needs to infer where new code should go.
 
+## Running The Examples
+
+Run each example from its own directory under `examples/`.
+
+### C# API
+
+From `examples/csharp-api/src/CodexEngineeringPlaybook.CSharpApi`:
+
+- `dotnet run`
+
+The API will start with the `OrdersController` routes under `/api/orders`.
+
+### Python API
+
+From `examples/python-api`:
+
+- `python -m pip install .[dev]`
+- `python -m uvicorn app.main:app --reload`
+
+The API will start with the order routes under `/orders`.
+
+### React App
+
+From `examples/react-app`:
+
+- `npm.cmd install`
+- `npm.cmd run dev`
+
+Use `npm.cmd` on Windows PowerShell if `npm` is blocked by local execution policy.
+
 ## How To Use This Repo With Codex
 
 1. Keep [AGENTS.md](AGENTS.md) small and durable. Do not move detailed workflow logic into it unless the rule truly applies repo-wide.
