@@ -1,0 +1,31 @@
+from dataclasses import dataclass
+
+from app.data.orders import OrderRepository
+from app.schemas.orders import CreateOrderRequest, OrderRecord, OrderResponse
+
+
+class OrderNotFoundError(Exception):
+    pass
+
+
+@dataclass(slots=True)
+class OrderService:
+    repository: OrderRepository
+
+    async def list_orders(self) -> list[OrderResponse]:
+        orders = await self.repository.list_orders()
+        return [OrderResponse.model_validate(order) for order in orders]
+
+    async def get_order(self, order_id: str) -> OrderResponse:
+        order = await self.repository.get_by_id(order_id)
+        if order is None:
+            raise OrderNotFoundError(f"Order '{order_id}' was not found.")
+        return OrderResponse.model_validate(order)
+
+    async def create_order(self, request: CreateOrderRequest) -> OrderResponse:
+        record = OrderRecord.create(
+            customer_name=request.customer_name,
+            total_amount=request.total_amount,
+        )
+        created = await self.repository.create(record)
+        return OrderResponse.model_validate(created)

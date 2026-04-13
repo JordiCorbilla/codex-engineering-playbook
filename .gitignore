@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Node / frontend
+node_modules/
+dist/
+
+# .NET
+bin/
+obj/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+blog/beyond-prompts-building-a-codex-playbook-for-real-application-development.md
